@@ -35,6 +35,17 @@ public class MedalServlet extends HttpServlet {
         String medal = request.getParameter("medal");
 
 
+        if(country == null || country.equals("")){
+            response.getWriter().write("Land mag niet leeg zijn!");
+            return;
+        }
+
+        if(sport == null || sport.equals("")){
+            response.getWriter().write("Sport mag niet leeg zijn!");
+            return;
+        }
+
+
    /* try {
         Country c = (Country) query.getSingleResult();
     }*/
@@ -42,15 +53,26 @@ public class MedalServlet extends HttpServlet {
         Medaille med = new Medaille(MedailleType.valueOf(medal.toUpperCase()),sport);
 
         Country c = new Country(country);
-        c.addMedal(med);
-        countries.add(c);
 
+        boolean exists = false;
+
+        for(Country co : countries){
+            if(co.getName().equals(country)){
+                c = co;
+                exists = true;
+                break;
+            }
+        }
+
+        c.addMedal(med);
+        if(!exists) {
+            countries.add(c);
+        }
 
         response.getWriter().write("New Medal Added!");
 
+        System.out.println(countries.size());
 
-
-        /*}*/
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
