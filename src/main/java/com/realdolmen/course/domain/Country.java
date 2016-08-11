@@ -17,7 +17,7 @@ public class Country {
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
+    @OneToMany
     private List<Medaille> medals = new ArrayList<>();
 
     public void addMedal(Medaille medal){

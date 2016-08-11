@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by VCLBB37 on 11/08/2016.
@@ -22,8 +24,9 @@ import java.io.IOException;
 @WebServlet(name = "/MedalServlet", urlPatterns = "/MedalServlet")
 public class MedalServlet extends HttpServlet {
 
-    @PersistenceContext
-    private EntityManager em;
+
+    List<Country> countries = new ArrayList<>();
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("Hello World---------------------------");
@@ -31,8 +34,6 @@ public class MedalServlet extends HttpServlet {
         String sport = request.getParameter("sport");
         String medal = request.getParameter("medal");
 
-        TypedQuery query = em.createQuery("select p from Country p where p.name =:name ", Country.class);
-        query.setParameter("name",country);
 
    /* try {
         Country c = (Country) query.getSingleResult();
@@ -40,22 +41,22 @@ public class MedalServlet extends HttpServlet {
 
         Medaille med = new Medaille(MedailleType.valueOf(medal.toUpperCase()),sport);
 
-        /*if (!rs.next()){
-            //ResultSet is empty
-        }
+        Country c = new Country(country);
+        c.addMedal(med);
+        countries.add(c);
 
-        if(c!=null){
-            c.addMedal(med);
-            em.persist(c);
-        }else{*/
-            Country c = new Country(country);
-            c.addMedal(med);
 
-            em.persist(c);
+        response.getWriter().write("New Medal Added!");
+
+
+
         /*}*/
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.getWriter().write("Hello");
+        request.setAttribute("countries", countries);
+
+        //request.getRequestDispatcher()...
     }
 }
