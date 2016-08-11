@@ -79,6 +79,6 @@ public class MedalServlet extends HttpServlet {
         response.getWriter().write("Hello");
         request.setAttribute("countries", countries);
 
-        //request.getRequestDispatcher()...
+        request.getRequestDispatcher("olympic.jsp").forward(request, response);
     }
 }

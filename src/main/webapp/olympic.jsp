@@ -32,10 +32,10 @@
 	</thead>
 	<tbody>
 	<tr>
-		<c:forEach var="medal" items="#{medal}">
-			<td>#{medal.country}</td>
-			<td>#{medal.sport}</td>
-			<td>#{medal.medal}</td>
+		<c:forEach var="medal" items="${countries}">
+			<td>${countries.country}</td>
+			<td>${countries.sport}</td>
+			<td>${countries.medal}</td>
 		</c:forEach>
 	</tr>
 	</tbody>
