@@ -76,7 +76,7 @@ public class MedalServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.getWriter().write("Hello");
+        //response.getWriter().write("Hello");
         request.setAttribute("countries", countries);
 
         request.getRequestDispatcher("olympic.jsp").forward(request, response);

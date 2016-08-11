@@ -1,3 +1,5 @@
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -27,17 +29,17 @@
 	<table>
 	<thead>
 		<td>Land</td>
-		<td>Sport</td>
 		<td>Aantal medailles</td>
 	</thead>
 	<tbody>
-	<tr>
-		<c:forEach var="medal" items="${countries}">
-			<td>${countries.country}</td>
-			<td>${countries.sport}</td>
-			<td>${countries.medal}</td>
-		</c:forEach>
+
+		<c:forEach var="country" items="${countries}">
+			<tr>
+			<td>${country.name}</td>
+			<td>${country.numberOfMedals}</td>
 	</tr>
+		</c:forEach>
+
 	</tbody>
 	</table>
 </body>
